@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- ✅ SEO -->
+  <title>Free Online Word Counter & Reading Time Tool</title>
+  <meta name="description" content="Count words, characters, and estimate reading time instantly. Free online word counter and reading time calculator for writers, students, and bloggers." />
+  <meta name="keywords" content="word counter, character counter, reading time calculator, online word counter, text counter tool" />
+  
+  <!-- ✅ Open Graph (Social Media) -->
+  <meta property="og:title" content="Free Online Word Counter & Reading Time Tool" />
+  <meta property="og:description" content="Easily count words, characters, and calculate reading time. Perfect for students, writers, and bloggers." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yourdomain.com" /> <!-- Replace with your domain -->
+  <meta property="og:image" content="https://yourdomain.com/og-image.png" /> <!-- Optional preview image -->
+  
+  <!-- ✅ Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Online Word Counter & Reading Time Tool" />
+  <meta name="twitter:description" content="Count words, characters, and estimate reading time instantly. Free tool for writers & students." />
+  <meta name="twitter:image" content="https://yourdomain.com/og-image.png" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col items-center p-6">
+  <div class="max-w-2xl w-full bg-white rounded-2xl shadow p-6">
+    <h1 class="text-2xl font-bold mb-4 text-center">Word Counter & Reading Time</h1>
+    <p class="text-gray-600 text-center mb-4">Paste your text below to instantly count words, characters, and estimate reading time.</p>
+    
+    <textarea 
+      id="textInput" 
+      class="w-full h-48 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+      placeholder="Type or paste your text here..."
+    ></textarea>
+    
+    <div class="mt-4 grid grid-cols-3 gap-4 text-center">
+      <div class="bg-gray-100 p-3 rounded-lg">
+        <p class="font-semibold">Words</p>
+        <p id="wordCount" class="text-lg">0</p>
+      </div>
+      <div class="bg-gray-100 p-3 rounded-lg">
+        <p class="font-semibold">Characters</p>
+        <p id="charCount" class="text-lg">0</p>
+      </div>
+      <div class="bg-gray-100 p-3 rounded-lg">
+        <p class="font-semibold">Reading Time</p>
+        <p id="readingTime" class="text-lg">0 min</p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mt-6 text-gray-500 text-sm">
+    © 2025 Word Counter Tool — Free for Everyone
+  </footer>
+
+  <script>
+    const textInput = document.getElementById("textInput");
+    const wordCountEl = document.getElementById("wordCount");
+    const charCountEl = document.getElementById("charCount");
+    const readingTimeEl = document.getElementById("readingTime");
+
+    textInput.addEventListener("input", () => {
+      const text = textInput.value.trim();
+      const words = text ? text.split(/\s+/).length : 0;
+      const chars = text.length;
+      const readingTime = Math.ceil(words / 200); // avg ~200 wpm
+
+      wordCountEl.textContent = words;
+      charCountEl.textContent = chars;
+      readingTimeEl.textContent = readingTime + " min";
+    });
+  </script>
+</body>
+</html>
