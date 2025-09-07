@@ -9,12 +9,12 @@
   <meta name="description" content="Count words, characters, and estimate reading time instantly. Free online word counter and reading time calculator for writers, students, and bloggers." />
   <meta name="keywords" content="word counter, character counter, reading time calculator, online word counter, text counter tool" />
   
-  <!-- ✅ Open Graph (Social Media) -->
+  <!-- ✅ Open Graph -->
   <meta property="og:title" content="Free Online Word Counter & Reading Time Tool" />
   <meta property="og:description" content="Easily count words, characters, and calculate reading time. Perfect for students, writers, and bloggers." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://yourdomain.com" /> <!-- Replace with your domain -->
-  <meta property="og:image" content="https://yourdomain.com/og-image.png" /> <!-- Optional preview image -->
+  <meta property="og:url" content="https://yourdomain.com" />
+  <meta property="og:image" content="https://yourdomain.com/og-image.png" />
   
   <!-- ✅ Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
@@ -24,39 +24,78 @@
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Tailwind Dark Mode (class strategy)
+    tailwind.config = {
+      darkMode: 'class'
+    }
+  </script>
+
+  <!-- ✅ Google Analytics (replace G-XXXXXXX with your ID) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXX'); // Replace with your GA4 ID
+  </script>
 </head>
-<body class="bg-gray-50 min-h-screen flex flex-col items-center p-6">
-  <div class="max-w-2xl w-full bg-white rounded-2xl shadow p-6">
-    <h1 class="text-2xl font-bold mb-4 text-center">Word Counter & Reading Time</h1>
-    <p class="text-gray-600 text-center mb-4">Paste your text below to instantly count words, characters, and estimate reading time.</p>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen flex flex-col items-center p-6 transition-colors duration-300">
+  <div class="max-w-2xl w-full bg-white dark:bg-gray-800 dark:text-gray-200 rounded-2xl shadow p-6">
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-4">
+      <h1 class="text-2xl font-bold">Word Counter & Reading Time</h1>
+      <!-- Dark Mode Toggle -->
+      <button id="toggleTheme" class="p-2 rounded-lg border dark:border-gray-600">
+        🌙
+      </button>
+    </div>
     
+    <p class="text-gray-600 dark:text-gray-400 text-center mb-4">
+      Paste your text below to instantly count words, characters, and estimate reading time.
+    </p>
+    
+    <!-- Text Area -->
     <textarea 
       id="textInput" 
-      class="w-full h-48 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+      class="w-full h-48 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100"
       placeholder="Type or paste your text here..."
     ></textarea>
     
+    <!-- Results -->
     <div class="mt-4 grid grid-cols-3 gap-4 text-center">
-      <div class="bg-gray-100 p-3 rounded-lg">
+      <div class="bg-gray-100 dark:bg-gray-700 p-3 rounded-lg">
         <p class="font-semibold">Words</p>
         <p id="wordCount" class="text-lg">0</p>
       </div>
-      <div class="bg-gray-100 p-3 rounded-lg">
+      <div class="bg-gray-100 dark:bg-gray-700 p-3 rounded-lg">
         <p class="font-semibold">Characters</p>
         <p id="charCount" class="text-lg">0</p>
       </div>
-      <div class="bg-gray-100 p-3 rounded-lg">
+      <div class="bg-gray-100 dark:bg-gray-700 p-3 rounded-lg">
         <p class="font-semibold">Reading Time</p>
         <p id="readingTime" class="text-lg">0 min</p>
       </div>
     </div>
+    
+    <!-- Buy Me a Coffee -->
+    <div class="mt-6 text-center">
+      <a href="https://www.buymeacoffee.com/yourusername" target="_blank">
+        <img 
+          src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" 
+          alt="Buy Me A Coffee" 
+          class="mx-auto w-44 rounded-lg shadow hover:scale-105 transition-transform"
+        />
+      </a>
+    </div>
   </div>
 
-  <footer class="mt-6 text-gray-500 text-sm">
+  <footer class="mt-6 text-gray-500 dark:text-gray-400 text-sm">
     © 2025 Word Counter Tool — Free for Everyone
   </footer>
 
   <script>
+    // Word Counter Logic
     const textInput = document.getElementById("textInput");
     const wordCountEl = document.getElementById("wordCount");
     const charCountEl = document.getElementById("charCount");
@@ -72,6 +111,24 @@
       charCountEl.textContent = chars;
       readingTimeEl.textContent = readingTime + " min";
     });
+
+    // Dark Mode Toggle
+    const toggleTheme = document.getElementById("toggleTheme");
+    const htmlEl = document.documentElement;
+
+    // Load saved theme
+    if (localStorage.getItem("theme") === "dark") {
+      htmlEl.classList.add("dark");
+    }
+
+    toggleTheme.addEventListener("click", () => {
+      htmlEl.classList.toggle("dark");
+      localStorage.setItem("theme", htmlEl.classList.contains("dark") ? "dark" : "light");
+      toggleTheme.textContent = htmlEl.classList.contains("dark") ? "☀️" : "🌙";
+    });
+
+    // Set correct icon on load
+    toggleTheme.textContent = htmlEl.classList.contains("dark") ? "☀️" : "🌙";
   </script>
 </body>
 </html>
